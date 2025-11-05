@@ -97,3 +97,9 @@ const rawApiData = [
     stock: 60,
   },
 ];
+
+//? Process
+//* Filter => Electronics with rating >= 4.5
+//* Sort => Rating
+//* Slice => Top 5
+//* Map => Transform object shape to { name : "Name"}
