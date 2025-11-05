@@ -12,3 +12,40 @@ const course2 = { name: "Python", duration: "4 months" };
 
 obj2["course1"] = { courseId: "JS-101", ...course1 };
 console.log(obj2);
+
+const fruits = { name: "Mango", color: "Yellow" };
+const obj3 = {};
+obj3.animal = { name: "Cow", color: "White" };
+obj3[fruits] = { name: "Banana", color: "Deep Yellow" };
+console.log(obj3["[object Object]"]);
+
+// Example of Map
+const map = new Map();
+map.set("course1", { courseId: "JS-101", name: "JavaScript" });
+map.set("course2", { courseId: "PY-101", name: "Python" });
+console.log(map.get("course1"));
+console.log(map.get("course2"));
+const keyObj = { id: 1 };
+map.set(keyObj, { courseId: "RB-101", name: "Ruby" });
+console.log(map.get(keyObj));
+
+const fruit1 = { name: "Mango", color: "Yellow" };
+const fruit2 = { name: "Banana", color: "Deep Yellow" };
+map.set(fruit1, { taste: "Sweet" });
+map.set(fruit2, { taste: "Very Sweet" });
+console.log(map.get(fruit1));
+console.log(map.get(fruit2));
+
+// Iterating over Map
+for (const [key, value] of map) {
+  console.log(key, value);
+}
+
+map.forEach((value, key) => {
+  console.log(key, value);
+});
+
+console.log(map.size);
+map.delete("course1");
+console.log(map.size);
+console.log(map.has("course2"));
