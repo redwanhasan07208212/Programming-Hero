@@ -27,6 +27,3 @@ const tagsFromPosts = [
 
 const allTagsFlat = [...new Set(tagsFromPosts.flat(Infinity))];
 console.log(allTagsFlat);
-
-const currentUserRoles = ["user", "editor"];
-const featureAccessRoles = ["admin", "manager"];
