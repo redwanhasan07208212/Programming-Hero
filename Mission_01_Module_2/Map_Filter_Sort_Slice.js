@@ -107,5 +107,8 @@ const rawApiData = [
 const topElectronicsProduct = rawApiData
   .filter((item) => item.category === "Electronics")
   .sort((a, b) => b.rating - a.rating)
-  .slice(0, 5);
+  .slice(0, 5)
+  .map((item) => {
+    return { name: item.productName };
+  });
 console.log(topElectronicsProduct);
