@@ -103,3 +103,9 @@ const rawApiData = [
 //* Sort => Rating
 //* Slice => Top 5
 //* Map => Transform object shape to { name : "Name"}
+
+const topElectronicsProduct = rawApiData
+  .filter((item) => item.category === "Electronics")
+  .sort((a, b) => b.rating - a.rating)
+  .slice(0, 5);
+console.log(topElectronicsProduct);

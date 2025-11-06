@@ -63,6 +63,7 @@ const course2 = { name: "Python", duration: "4 months" };
 const map = new Map();
 map.set("course1", course1);
 map.set("course2", course2);
-for (const key of map.keys()) {
-  console.log(key);
+for (const [key, value] of map) {
+  console.log("Key: ", key, "Value: ", value);
 }
+console.log(map.get("course1"));
