@@ -24,3 +24,24 @@ const posts = [
 //   { id: 102, name: 'Bob', posts: [ { id: 1, ... }, { id: 5, ... } ] },
 //   { id: 103, name: 'Charlie', posts: [ { id: 4, ... } ] }
 // ]
+
+// TODO Create a hash table of posts grouped by userId
+
+const postByUserId = posts.reduce((table, post) => {
+  if (!table[post.userId]) {
+    table[post.userId] = [];
+  }
+  table[post.userId].push(post);
+  return table;
+}, {});
+
+//? console.log(postByUserId);
+
+const userWithPosts = users.map((user) => {
+  return {
+    ...user,
+    posts: postByUserId[user.id] || [],
+  };
+});
+
+console.log(userWithPosts);
