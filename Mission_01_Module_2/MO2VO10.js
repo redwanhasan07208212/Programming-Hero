@@ -19,3 +19,22 @@ const events = [
 //   "2025-10-22T10:30:00.000Z": { "total": 2 },
 //   "2025-10-22T11:00:00.000Z": { "total": 1 }
 // }
+const INTERVAL = 30 * 60 * 1000; // 30 minutes in milliseconds
+const getBinningTimeStamps = (timeStamp) => {
+  const date = new Date(timeStamp);
+  const flooredTime = Math.floor(date.getTime() / INTERVAL) * INTERVAL;
+
+  return new Date(flooredTime).toISOString();
+};
+const binnedTotalCount = events.reduce((acc, event) => {
+  const bin = getBinningTimeStamps(event.timestamp);
+  if (!acc[bin]) {
+    acc[bin] = { total: 0 };
+  }
+  acc[bin].total += 1;
+  return acc;
+}, {});
+console.log(binnedTotalCount);
+// console.log("After Flooring", getBinningTimeStamps("2025-10-22T10:01:00Z"));
+// console.log("After Flooring", getBinningTimeStamps("2025-10-22T10:05:00Z"));
+// console.log("After Flooring", getBinningTimeStamps("2025-10-22T10:14:00Z"));
