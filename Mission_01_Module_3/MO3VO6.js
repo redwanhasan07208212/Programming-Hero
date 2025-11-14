@@ -21,6 +21,7 @@ class LinkedList {
       this.tail = newNode;
     }
     this.length++;
+    return this;
   }
   prepend(value) {
     const newNode = new Node(value);
@@ -32,6 +33,7 @@ class LinkedList {
       newNode.next = this.head;
       this.head = newNode;
     }
+    return this;
   }
   insert(index, value) {
     if (index < 0 || index > this.length) {
@@ -45,13 +47,24 @@ class LinkedList {
       this.append(value);
     }
     // find the leading one
+    const leadingNode = this._traverseNode(index - 1);
+    const holdingNode = leadingNode.next;
+    //* console.log(leadingNode);
+    const newNode = new Node(value);
+    leadingNode.next = newNode;
+    newNode.next = holdingNode;
+
+    this.length++;
+  }
+
+  _traverseNode(index) {
     let count = 0;
-    let leadingNode = this.head;
-    while (count !== index - 1) {
-      leadingNode = leadingNode.next;
+    let currentNode = this.head;
+    while (count !== index) {
+      currentNode = currentNode.next;
       count++;
     }
-    console.log(leadingNode);
+    return currentNode;
   }
 
   print() {
@@ -66,11 +79,7 @@ class LinkedList {
 }
 
 const linkedList = new LinkedList();
-linkedList.append(1);
-linkedList.append(2);
-linkedList.append(3);
-linkedList.prepend(10);
-linkedList.prepend(20);
-linkedList.prepend(30);
-linkedList.insert(2, 40);
+linkedList.append(1).append(2).append(3);
+linkedList.prepend(10).prepend(30).prepend(40);
+linkedList.insert(2, 20);
 linkedList.print();
