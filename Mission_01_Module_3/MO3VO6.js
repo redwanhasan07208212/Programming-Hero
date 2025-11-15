@@ -56,6 +56,11 @@ class LinkedList {
 
     this.length++;
   }
+  remove(index) {
+    const leadingNode = this._traverseNode(index - 1);
+    const nodeToRemove = leadingNode.next;
+    leadingNode.next = nodeToRemove.next;
+  }
 
   _traverseNode(index) {
     let count = 0;
@@ -82,4 +87,7 @@ const linkedList = new LinkedList();
 linkedList.append(1).append(2).append(3);
 linkedList.prepend(10).prepend(30).prepend(40);
 linkedList.insert(2, 20);
+linkedList.print();
+
+linkedList.remove(3);
 linkedList.print();
