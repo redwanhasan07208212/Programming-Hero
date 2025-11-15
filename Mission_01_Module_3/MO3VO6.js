@@ -57,9 +57,25 @@ class LinkedList {
     this.length++;
   }
   remove(index) {
+    if (index === 0) {
+      const removedItem = this.head.value;
+      this.head = this.head.next;
+
+      if (this.length === 1) {
+        this.tail = null;
+      }
+
+      this.length--;
+      return removedItem;
+    }
+
     const leadingNode = this._traverseNode(index - 1);
     const nodeToRemove = leadingNode.next;
     leadingNode.next = nodeToRemove.next;
+
+    if (leadingNode.next === null) {
+      this.tail = leadingNode;
+    }
   }
 
   _traverseNode(index) {
@@ -84,10 +100,8 @@ class LinkedList {
 }
 
 const linkedList = new LinkedList();
-linkedList.append(1).append(2).append(3);
-linkedList.prepend(10).prepend(30).prepend(40);
-linkedList.insert(2, 20);
+linkedList.append(1);
 linkedList.print();
 
-linkedList.remove(3);
+linkedList.remove(0);
 linkedList.print();
