@@ -25,7 +25,14 @@ const bracketChecker = (str) => {
     if (element === "(" || element === "{" || element === "[") {
       stack.push(element);
     } else if (element === ")" || element === "}" || element === "]") {
-      if (stack.isEmpty() || stack.pop() !== bracketMap[element]) {
+      if (stack.isEmpty()) {
+        return false;
+      }
+
+      const expected = bracketMap[element];
+      const got = stack.pop();
+      console.log("Expected: ", expected, "Got: ", got);
+      if (expected !== got) {
         return false;
       }
     }
