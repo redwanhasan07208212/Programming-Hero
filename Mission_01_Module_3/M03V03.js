@@ -2,7 +2,7 @@
 // 1. push
 // 2. pop
 // 3. peek
-class Stack {
+export default class Stack {
   constructor() {
     this.items = [];
   }
@@ -40,11 +40,11 @@ class Stack {
 }
 
 const stack1 = new Stack();
-stack1.push(5);
-stack1.push(10);
-stack1.push(15);
-stack1.print(); // [5, 10, 15]
-console.log(stack1.pop()); // 15
-stack1.print(); // [5, 10]
-console.log(stack1.peek()); // 10
-stack1.print(); // [5, 10]
+// stack1.push(5);
+// stack1.push(10);
+// stack1.push(15);
+// stack1.print(); // [5, 10, 15]
+// console.log(stack1.pop()); // 15
+// stack1.print(); // [5, 10]
+// console.log(stack1.peek()); // 10
+// stack1.print(); // [5, 10]
