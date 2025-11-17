@@ -14,17 +14,24 @@
 //? "(()" -> false
 import Stack from "../Mission_01_Module_3/M03V03.js";
 const bracketChecker = (str) => {
+  const bracketMap = {
+    ")": "(",
+    "}": "{",
+    "]": "[",
+  };
   const stack = new Stack();
   for (let i = 0; i < str.length; i++) {
     const element = str[i];
     if (element === "(" || element === "{" || element === "[") {
       stack.push(element);
     } else if (element === ")" || element === "}" || element === "]") {
-      if (stack.isEmpty() || stack.pop()) {
+      if (stack.isEmpty() || stack.pop() !== bracketMap[element]) {
         return false;
       }
     }
   }
-  return true;
+  return stack.isEmpty();
 };
 console.log(bracketChecker("([{}])"));
+console.log(bracketChecker("([{])"));
+console.log(bracketChecker("}([{])"));
