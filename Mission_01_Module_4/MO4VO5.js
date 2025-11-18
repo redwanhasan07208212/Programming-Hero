@@ -24,4 +24,19 @@ const isPalindrome = (str) => {
   return false;
 };
 
+const twoPointerPalindrome = (str) => {
+  const normalized = str.toLowerCase().replace(/[^a-z0-9]g/, "");
+  const left = 0;
+  const right = normalized.length - 1;
+
+  while (left < right) {
+    if (normalized[left] !== normalized[right]) {
+      return false;
+    }
+    left++;
+    right--;
+  }
+
+  return true;
+};
 console.log(isPalindrome("A man, a plan, a canal: Panama"));
