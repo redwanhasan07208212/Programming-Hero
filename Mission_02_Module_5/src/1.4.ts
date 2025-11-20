@@ -8,7 +8,7 @@
     "Data Science",
     "Machine Learning",
   ];
-  let eligileRoll: number[] = [34, 78, 65, 80];
+  let eligibleRoll: number[] = [34, 78, 65, 80];
 
   let d; // this is called the anytype data structure its not good practice for declare anytype.
 
@@ -22,7 +22,7 @@
   console.log("Digit:", digit);
   console.log("Is Admin:", isAdmin);
   console.log("Courses:", courses);
-  console.log("Eligible Roll Numbers:", eligileRoll);
+  console.log("Eligible Roll Numbers:", eligibleRoll);
   console.log("x:", x);
   console.log("Coordinates:", coordinates);
   console.log("Age and Name:", ageName);
