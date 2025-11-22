@@ -3,9 +3,12 @@
 // string, number, boolean, undefined, null
 Object.defineProperty(exports, "__esModule", { value: true });
 // TS: never, unknown, void
-let userName = "Redwan";
+let userName = "Redwan"; // lowercase 'string'
 userName = "Hasan";
-let userId;
+let userId; // lowercase 'number'
 userId = 123.4533;
-userId.toFixed(3);
+let formattedIda = userId.toFixed(3);
+let isAdmin = false; // lowercase 'boolean'
+console.log(formattedIda);
+let x = undefined;
 //# sourceMappingURL=primitive.js.map
