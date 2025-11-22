@@ -7,7 +7,7 @@ let userName: string = "Redwan"; // lowercase 'string'
 userName = "Hasan";
 let userId: number; // lowercase 'number'
 userId = 123.4533;
-let formattedIda: String = userId.toFixed(3);
+let formattedIda: string = userId.toFixed(3);
 let isAdmin: boolean = false; // lowercase 'boolean'
 console.log(formattedIda);
 
