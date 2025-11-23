@@ -32,6 +32,7 @@ type Manager = {
 
 type EmployeeManager = Employee & Manager;
 
+// cSpell:ignore Chowdhury Shaheb
 const ChowdhuryShaheb: EmployeeManager = {
   id: "123",
   name: "Chowdhury Shaheb",
@@ -39,3 +40,5 @@ const ChowdhuryShaheb: EmployeeManager = {
   designation: "manager",
   teamSize: 20,
 };
+
+console.log(ChowdhuryShaheb);
