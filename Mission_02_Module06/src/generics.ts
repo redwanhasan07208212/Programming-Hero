@@ -28,3 +28,45 @@ type Coordinates<X, Y> = [X, Y];
 
 const coordinates1: Coordinates<number, number> = [20, 30];
 const coordinates2: Coordinates<string, string> = ["20", "30"];
+
+// You'd need separate functions for each type
+function getFirstString(arr: string[]): string {
+  return arr[0]!;
+}
+
+function getFirstNumber(arr: number[]): number {
+  return arr[0]!;
+}
+
+function getFirst<T>(arr: T[]): T {
+  return arr[0]!;
+}
+
+// Works with any type!
+const firstString = getFirst(["a", "b", "c"]); // string
+const firstNumber = getFirst([1, 2, 3]); // number
+
+// Generic function with type inference
+function identity<T>(value: T): T {
+  return value;
+}
+
+const num = identity(42); // T is inferred as number
+const str = identity("hello"); // T is inferred as string
+
+// Generic function with array operations
+function wrapInArray<T>(value: T): T[] {
+  return [value];
+}
+
+wrapInArray(5); // number[]
+wrapInArray("hi"); // string[]
+console.log(
+  users,
+  coordinates1,
+  coordinates2,
+  firstString,
+  firstNumber,
+  num,
+  str
+);
