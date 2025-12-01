@@ -1,2 +1,1 @@
-const FullName : string = "Redwan Hasan";
-console.log(FullName);
+const course = "Next level web development";

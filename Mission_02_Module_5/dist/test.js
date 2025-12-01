@@ -1,3 +1,4 @@
 "use strict";
-const FullName = "Redwan Hasan";
-console.log(FullName);
+Object.defineProperty(exports, "__esModule", { value: true });
+const course = "Next level web development";
+//# sourceMappingURL=test.js.map

@@ -30,7 +30,7 @@ const sales = [
 const categorizedSales = sales.reduce((table, sale) => {
   const { category, price, quantity } = sale;
 
-  console.log(table, ":--- ", sale, ":---");
+  // console.log(table, ":--- ", sale, ":---");
   if (!table[category]) {
     table[category] = {
       totalRevenue: 0,

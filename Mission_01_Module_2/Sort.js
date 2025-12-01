@@ -16,7 +16,9 @@ const nestedArrays = [
   [6, 7, 8, 9, [10, 11, 12], [13, 14]],
 ];
 
-const flatArray = nestedArrays.flat(Infinity).sort((a, b) => a - b);
+const flatArray = [
+  ...new Set(nestedArrays.flat(Infinity).sort((a, b) => a - b)),
+];
 console.log("Flat Array:", flatArray);
 
 const tagsFromPosts = [

@@ -35,7 +35,7 @@ const postByUserId = posts.reduce((table, post) => {
   return table;
 }, {});
 
-//? console.log(postByUserId);
+// console.log(postByUserId);
 
 const userWithPosts = users.map((user) => {
   return {
