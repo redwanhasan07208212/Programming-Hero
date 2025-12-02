@@ -7,6 +7,12 @@ type StringOrNumber = string | number;
 
 function processInput(input: StringOrNumber): string | number {
   // Add your type guard and implementation here
+  if (typeof input === "number") {
+    return Number(input) * 2;
+  }
+  if (typeof input === "string") {
+    return input.toUpperCase();
+  }
   return input;
 }
 
