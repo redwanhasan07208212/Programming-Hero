@@ -293,6 +293,34 @@ Create a function that handles each response type differently.
 
 // TODO: Implement your solution here
 
+type SuccessResponse = {
+  status: "success";
+  data: any;
+};
+type ErrorResponse = {
+  status: "error";
+  message: string;
+};
+type LoadingResponse = {
+  status: "loading";
+};
+
+type ApiResponse = SuccessResponse | ErrorResponse | LoadingResponse;
+
+const handleApiResponse = (response: ApiResponse): void => {
+  if (response.status === "success") {
+    console.log("Data:", response.data);
+  } else if (response.status === "error") {
+    console.log(`Error: ${response.message}`);
+  } else if (response.status === "loading") {
+    console.log("Loading...");
+  }
+};
+// Test cases
+handleApiResponse({ status: "success", data: { id: 1, name: "Test" } });
+handleApiResponse({ status: "error", message: "Something went wrong" });
+handleApiResponse({ status: "loading" });
+
 /*
 EXERCISE 3: Employee Management
 Create a system with three employee types:
