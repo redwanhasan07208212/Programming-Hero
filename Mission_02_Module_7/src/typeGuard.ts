@@ -332,6 +332,61 @@ Use custom type predicates for at least one check.
 */
 
 // TODO: Implement your solution here
+type Manager = {
+  name: string;
+  department: string;
+  reports: number;
+};
+type Developer = {
+  name: string;
+  language: string;
+  experience: number;
+};
+type Intern = {
+  name: string;
+  school: string;
+  mentor: string;
+};
+
+type Employee = Manager | Developer | Intern;
+
+const isManager = (employee: Employee): employee is Manager => {
+  return (employee as Manager).reports !== undefined;
+};
+
+const displayEmployeeInfo = (employee: Employee): void => {
+  if (isManager(employee)) {
+    console.log(
+      `Manager: ${employee.name}, Department: ${employee.department}, Reports: ${employee.reports}`
+    );
+  } else if ((employee as Developer).language !== undefined) {
+    const dev = employee as Developer;
+    console.log(
+      `Developer: ${dev.name}, Language: ${dev.language}, Experience: ${dev.experience} years`
+    );
+  } else {
+    const intern = employee as Intern;
+    console.log(
+      `Intern: ${intern.name}, School: ${intern.school}, Mentor: ${intern.mentor}`
+    );
+  }
+};
+// Test cases
+displayEmployeeInfo({
+  name: "Alice",
+  department: "HR",
+  reports: 5,
+});
+displayEmployeeInfo({
+  name: "Bob",
+  language: "TypeScript",
+  experience: 3,
+});
+displayEmployeeInfo({
+  name: "Charlie",
+  school: "XYZ University",
+  mentor: "Alice",
+});
 
 /*
 EXERCISE 4: Smart Form Validator
@@ -343,6 +398,43 @@ Each field type has different validation rules. Use type guards to validate corr
 */
 
 // TODO: Implement your solution here
+
+type TextField = {
+  type: "text";
+  value: string;
+  minLength: number;
+};
+type NumberField = {
+  type: "number";
+  value: number;
+  min: number;
+  max: number;
+};
+type EmailField = {
+  type: "email";
+  value: string;
+};
+
+type FormField = TextField | NumberField | EmailField;
+
+const validateField = (field: FormField): boolean => {
+  if (field.type === "text") {
+    return field.value.length >= field.minLength;
+  } else if (field.type === "number") {
+    return field.value >= field.min && field.value <= field.max;
+  } else if (field.type === "email") {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(field.value);
+  }
+  return false;
+};
+
+// Test cases
+console.log(validateField({ type: "text", value: "Hello", minLength: 3 })); // true
+console.log(validateField({ type: "number", value: 10, min: 5, max: 15 })); // true
+console.log(
+  validateField({ type: "email", value: "redwanhasancse@gmail.com" })
+);
 
 // ============================================
 // KEY TAKEAWAYS
