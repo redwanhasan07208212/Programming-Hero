@@ -137,14 +137,14 @@ operateVehicle(myBike);
 // PROBLEM 4: Custom Type Predicate
 // ============================================
 
-/*
-PROBLEM STATEMENT:
-You're building a pet store management system.
-Create a custom type guard function that:
-- Checks if an animal is a Dog (has bark method)
-- Returns a type predicate (animal is Dog)
-- Use this type guard in a function to make animals perform actions
-*/
+/**
+ * PROBLEM STATEMENT:
+ * You're building a pet store management system.
+ * Create a custom type guard function that:
+ * - Checks if an animal is a Dog (has bark method)
+ * - Returns a type predicate (animal is Dog)
+ * - Use this type guard in a function to make animals perform actions
+ */
 
 interface Cat {
   name: string;
@@ -249,6 +249,39 @@ Use type guards to handle each shape appropriately.
 
 // TODO: Implement your solution here
 
+type Circle = {
+  kind: "circle";
+  radius: number;
+};
+type Rectangle = {
+  kind: "rectangle";
+  width: number;
+  height: number;
+};
+type Triangle = {
+  kind: "triangle";
+  base: number;
+  height: number;
+};
+
+type Shape = Circle | Rectangle | Triangle;
+
+const calculateArea = (shape: Shape): number => {
+  if (shape.kind === "circle") {
+    return Math.PI * shape.radius * shape.radius;
+  } else if (shape.kind === "rectangle") {
+    return shape.width * shape.height;
+  } else if (shape.kind === "triangle") {
+    return 0.5 * shape.base * shape.height;
+  }
+  return 0;
+};
+
+// Test cases
+console.log(calculateArea({ kind: "circle", radius: 5 })); // Circle area
+console.log(calculateArea({ kind: "rectangle", width: 4, height: 6 })); // Rectangle area
+console.log(calculateArea({ kind: "triangle", base: 4, height: 5 })); // Triangle area
+
 /*
 EXERCISE 2: API Response Handler
 Create a type guard system for API responses:
@@ -263,7 +296,7 @@ Create a function that handles each response type differently.
 /*
 EXERCISE 3: Employee Management
 Create a system with three employee types:
-- Manager: { name: string, department: string, reportees: number }
+- Manager: { name: string, department: string, reports: number }
 - Developer: { name: string, language: string, experience: number }
 - Intern: { name: string, school: string, mentor: string }
 Create a function that displays appropriate information for each employee type.
