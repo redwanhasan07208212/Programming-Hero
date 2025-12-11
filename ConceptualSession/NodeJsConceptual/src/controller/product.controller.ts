@@ -1,6 +1,7 @@
 import type { IncomingMessage, ServerResponse } from "http";
 import { readProductsFromDB } from "../services/product.service";
 import type { IProduct } from "../types/product.interface";
+import { parseBody } from "../utility/parseBody";
 
 export const productController = (
   req: IncomingMessage,
@@ -30,5 +31,26 @@ export const productController = (
         data: product,
       })
     );
+  } else if (method === "POST" && url === "/products") {
+    parseBody(req)
+      .then((body) => {
+        const products = readProductsFromDB();
+        const newProduct: IProduct = {
+          id: products.length + 1,
+          ...body,
+        };
+        products.push(newProduct);
+        res.writeHead(201, { "content-type": "application/json" });
+        res.end(
+          JSON.stringify({
+            message: "Product created successfully",
+            data: newProduct,
+          })
+        );
+      })
+      .catch((error) => {
+        res.writeHead(400, { "content-type": "application/json" });
+        res.end(JSON.stringify({ error: "Invalid request body" }));
+      });
   }
 };
