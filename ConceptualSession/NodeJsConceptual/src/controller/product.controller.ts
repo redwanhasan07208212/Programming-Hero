@@ -1,5 +1,8 @@
 import type { IncomingMessage, ServerResponse } from "http";
-import { readProductsFromDB } from "../services/product.service";
+import {
+  readProductsFromDB,
+  writeProductsToDB,
+} from "../services/product.service";
 import type { IProduct } from "../types/product.interface";
 import { parseBody } from "../utility/parseBody";
 
@@ -40,6 +43,7 @@ export const productController = async (
           ...body,
         };
         products.push(newProduct);
+        writeProductsToDB(products);
         res.writeHead(201, { "content-type": "application/json" });
         res.end(
           JSON.stringify({

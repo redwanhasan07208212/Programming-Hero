@@ -1,6 +1,32 @@
 [
-  { "id": 1, "name": "T-shirt", "color": "Red" },
-  { "id": 2, "name": "T-shirt", "color": "Green" },
-  { "id": 3, "name": "T-shirt", "color": "Blue" },
-  { "id": 4, "name": "T-shirt", "color": "Yellow" }
+  {
+    "id": 1,
+    "name": "T-shirt",
+    "color": "Red"
+  },
+  {
+    "id": 2,
+    "name": "T-shirt",
+    "color": "Green"
+  },
+  {
+    "id": 3,
+    "name": "T-shirt",
+    "color": "Blue"
+  },
+  {
+    "id": 4,
+    "name": "T-shirt",
+    "color": "Yellow"
+  },
+  {
+    "id": 5,
+    "name": "Panjabi",
+    "color": "Green"
+  },
+  {
+    "id": 6,
+    "name": "Shirt",
+    "color": "Yellow"
+  }
 ]

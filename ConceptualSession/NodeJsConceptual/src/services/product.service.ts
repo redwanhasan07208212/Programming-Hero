@@ -7,4 +7,7 @@ export function readProductsFromDB() {
   const products = JSON.parse(data);
   return products;
 }
+export function writeProductsToDB(products: any) {
+  fs.writeFileSync(filePath, JSON.stringify(products, null, 2), "utf-8");
+}
 readProductsFromDB();
