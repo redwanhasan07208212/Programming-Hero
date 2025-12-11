@@ -3,7 +3,7 @@ import { readProductsFromDB } from "../services/product.service";
 import type { IProduct } from "../types/product.interface";
 import { parseBody } from "../utility/parseBody";
 
-export const productController = (
+export const productController = async (
   req: IncomingMessage,
   res: ServerResponse
 ) => {
@@ -32,7 +32,7 @@ export const productController = (
       })
     );
   } else if (method === "POST" && url === "/products") {
-    parseBody(req)
+    await parseBody(req)
       .then((body) => {
         const products = readProductsFromDB();
         const newProduct: IProduct = {
