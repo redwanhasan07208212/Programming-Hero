@@ -4,7 +4,7 @@ export const sendResponse = (
   res: ServerResponse,
   statusCode: number,
   success: boolean,
-  data?: string | object,
+  data?: string | object | null,
   message?: string
 ) => {
   const response = {

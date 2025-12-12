@@ -28,5 +28,15 @@
     "id": 6,
     "name": "shirt",
     "color": "Black"
+  },
+  {
+    "id": 7,
+    "name": "Polo Shirt",
+    "color": "Blue"
+  },
+  {
+    "id": 8,
+    "name": "Jeens",
+    "color": "Blue"
   }
 ]
