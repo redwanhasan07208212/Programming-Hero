@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "T-shirt",
-    "color": "Red"
+    "color": "Black"
   },
   {
     "id": 2,
@@ -10,9 +10,9 @@
     "color": "Green"
   },
   {
-    "id": 3,
+    "id": 1,
     "name": "T-shirt",
-    "color": "Blue"
+    "color": "Black"
   },
   {
     "id": 4,

@@ -56,5 +56,24 @@ export const productController = async (
         res.writeHead(400, { "content-type": "application/json" });
         res.end(JSON.stringify({ error: "Invalid request body" }));
       });
+  } else if (method === "PUT" && id !== null) {
+    const body = await parseBody(req);
+    const products = readProductsFromDB();
+    const productIndex = products.findIndex((p: IProduct) => p.id === id);
+    if (productIndex !== -1) {
+      const updatedProduct = { id: products[productIndex].id, ...body };
+      products[productIndex] = updatedProduct;
+      writeProductsToDB(products);
+      res.writeHead(200, { "content-type": "application/json" });
+      res.end(
+        JSON.stringify({
+          message: "Product updated successfully",
+          data: updatedProduct,
+        })
+      );
+    } else {
+      res.writeHead(404, { "content-type": "application/json" });
+      res.end(JSON.stringify({ error: "Product not found" }));
+    }
   }
 };
