@@ -75,5 +75,21 @@ export const productController = async (
       res.writeHead(404, { "content-type": "application/json" });
       res.end(JSON.stringify({ error: "Product not found" }));
     }
+  } else if (method === "DELETE" && id !== null) {
+    const products = readProductsFromDB();
+    const productIndex = products.findIndex((p: IProduct) => p.id === id);
+    if (productIndex !== -1) {
+      products.splice(productIndex, 1);
+      writeProductsToDB(products);
+      res.writeHead(200, { "content-type": "application/json" });
+      res.end(
+        JSON.stringify({
+          message: "Product deleted successfully",
+        })
+      );
+    } else {
+      res.writeHead(404, { "content-type": "application/json" });
+      res.end(JSON.stringify({ error: "Product not found" }));
+    }
   }
 };

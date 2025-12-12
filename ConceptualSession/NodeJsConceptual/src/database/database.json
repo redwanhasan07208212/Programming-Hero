@@ -1,18 +1,8 @@
 [
   {
-    "id": 1,
-    "name": "T-shirt",
-    "color": "Black"
-  },
-  {
     "id": 2,
     "name": "T-shirt",
     "color": "Green"
-  },
-  {
-    "id": 1,
-    "name": "T-shirt",
-    "color": "Black"
   },
   {
     "id": 4,
@@ -28,5 +18,15 @@
     "id": 6,
     "name": "Shirt",
     "color": "Yellow"
+  },
+  {
+    "id": 1,
+    "name": "T-shirt",
+    "color": "Black"
+  },
+  {
+    "id": 6,
+    "name": "shirt",
+    "color": "Black"
   }
 ]
