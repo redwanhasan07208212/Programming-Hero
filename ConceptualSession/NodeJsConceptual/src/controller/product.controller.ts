@@ -1,4 +1,4 @@
-import type { IncomingMessage, ServerResponse } from "http";
+import { IncomingMessage, ServerResponse } from "http";
 import {
   readProductsFromDB,
   writeProductsToDB,

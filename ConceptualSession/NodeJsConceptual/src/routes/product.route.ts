@@ -1,4 +1,4 @@
-import type { IncomingMessage, ServerResponse } from "http";
+import { IncomingMessage, ServerResponse } from "http";
 import { productController } from "../controller/product.controller";
 
 export const productRoute = (req: IncomingMessage, res: ServerResponse) => {

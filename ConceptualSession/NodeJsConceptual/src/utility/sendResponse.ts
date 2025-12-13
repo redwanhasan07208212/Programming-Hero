@@ -1,4 +1,4 @@
-import type { ServerResponse } from "http";
+import { ServerResponse } from "http";
 
 export const sendResponse = (
   res: ServerResponse,

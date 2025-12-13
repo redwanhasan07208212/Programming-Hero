@@ -1,4 +1,4 @@
-import { createServer, type Server } from "http";
+import { createServer, Server } from "http";
 import { productRoute } from "./routes/product.route";
 
 const server: Server = createServer((req, res) => {
