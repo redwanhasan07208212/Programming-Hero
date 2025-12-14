@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "@types/node": "^25.0.1",
+    "@types/node": "^25.0.2",
     "typescript": "^5.9.3"
   },
   "name": "mission_03_module_12",
