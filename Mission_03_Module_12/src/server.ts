@@ -15,7 +15,8 @@ const pool = new Pool({
   connectionString: `${process.env.CONNECTION_STR}`,
 });
 const initDB = async () => {
-  await pool.query(`CREATE TABLE IF NOT EXISTS users(
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS users(
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
@@ -42,6 +43,9 @@ initDB();
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello Next Level Developers!");
 });
+// users crud operations
+
+//Create User
 app.post("/users", async (req: Request, res: Response) => {
   const { name, email } = req.body;
 
@@ -63,6 +67,24 @@ app.post("/users", async (req: Request, res: Response) => {
     });
   }
 });
+//All users
+app.get("/users", async (req: Request, res: Response) => {
+  const result = await pool.query(`SELECT * FROM users`);
+  try {
+    res.status(200).json({
+      success: true,
+      message: "Data Fetched Successfully",
+      data: result.rows,
+    });
+  } catch (err: any) {
+    res.status(500).json({
+      status: false,
+      message: err.message,
+    });
+  }
+});
+//Single User
+app.get("/users/:id", async (req: Request, res: Response) => {});
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
