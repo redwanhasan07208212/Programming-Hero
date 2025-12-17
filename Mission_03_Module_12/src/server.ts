@@ -193,12 +193,40 @@ app.get("/todos/:id", async (req: Request, res: Response) => {
     if (result.rows.length === 0) {
       res.status(404).json({
         status: false,
-        message: "User is not found",
+        message: "Todo is not found",
       });
     } else {
       res.status(200).json({
         status: true,
-        message: "User fetched Successfully",
+        message: "Todo fetched Successfully",
+        data: result.rows[0],
+      });
+    }
+  } catch (err: any) {
+    res.status(500).json({
+      status: false,
+      message: err.message,
+    });
+  }
+});
+
+// Todo update
+app.put("/todos/:id", async (req: Request, res: Response) => {
+  const { title } = req.body;
+  try {
+    const result = await pool.query(
+      `UPDATE todos SET title=$1 WHERE id=$2 RETURNING *`,
+      [title, req.params.id]
+    );
+    if (result.rows.length === 0) {
+      res.status(404).json({
+        status: false,
+        message: "Todo is not found",
+      });
+    } else {
+      res.status(200).json({
+        status: true,
+        message: "Todo fetched Successfully",
         data: result.rows[0],
       });
     }
