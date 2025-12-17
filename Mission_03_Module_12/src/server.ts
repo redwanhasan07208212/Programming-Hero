@@ -62,10 +62,6 @@ app.post("/users", async (req: Request, res: Response) => {
       message: err.message,
     });
   }
-  res.status(201).json({
-    success: true,
-    message: "Api Working",
-  });
 });
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
