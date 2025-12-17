@@ -21,21 +21,6 @@ app.get("/", logger, (req: Request, res: Response) => {
 app.use("/users", userRoutes);
 
 //All users
-app.get("/users", async (req: Request, res: Response) => {
-  try {
-    const result = await pool.query(`SELECT * FROM users`);
-    res.status(200).json({
-      success: true,
-      message: "Data Fetched Successfully",
-      data: result.rows,
-    });
-  } catch (err: any) {
-    res.status(500).json({
-      status: false,
-      message: err.message,
-    });
-  }
-});
 
 //Single User
 app.get("/users/:id", async (req: Request, res: Response) => {

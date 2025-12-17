@@ -25,4 +25,20 @@ router.post("/", async (req: Request, res: Response) => {
   }
 });
 
+router.get("/", async (req: Request, res: Response) => {
+  try {
+    const result = await pool.query(`SELECT * FROM users`);
+    res.status(200).json({
+      success: true,
+      message: "Data Fetched Successfully",
+      data: result.rows,
+    });
+  } catch (err: any) {
+    res.status(500).json({
+      status: false,
+      message: err.message,
+    });
+  }
+});
+
 export const userRoutes = router;
