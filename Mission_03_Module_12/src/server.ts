@@ -1,8 +1,9 @@
 import express, { NextFunction, Request, Response } from "express";
 import initDB, { pool } from "./config/db";
+import config from "./config";
 
 const app = express();
-const port = 8000;
+const port = config.port;
 
 //parser
 
