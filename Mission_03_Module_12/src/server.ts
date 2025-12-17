@@ -166,6 +166,7 @@ app.post("/todos", async (req: Request, res: Response) => {
     });
   }
 });
+
 // todo get
 app.get("/todos", async (req: Request, res: Response) => {
   try {
@@ -182,12 +183,33 @@ app.get("/todos", async (req: Request, res: Response) => {
     });
   }
 });
+
+// Todo Single
+app.get("/todos/:id", async (req: Request, res: Response) => {
+  try {
+    const result = await pool.query(`SELECT * FROM todos WHERE id=$1`, [
+      req.params.id,
+    ]);
+    if (result.rows.length === 0) {
+      res.status(404).json({
+        status: false,
+        message: "User is not found",
+      });
+    } else {
+      res.status(200).json({
+        status: true,
+        message: "User fetched Successfully",
+        data: result.rows[0],
+      });
+    }
+  } catch (err: any) {
+    res.status(500).json({
+      status: false,
+      message: err.message,
+    });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
-
-// logger middleware
-// const logger = (req: Request, res: Response, next: NextFunction) => {
-//   console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}\n`);
-//   next();
-// };
