@@ -124,7 +124,7 @@ app.delete("/users/:id", async (req: Request, res: Response) => {
     const result = await pool.query(`DELETE FROM users WHERE id=$1`, [
       req.params.id,
     ]);
-    if (result.rows.length === 0) {
+    if (result.rowCount === 0) {
       res.status(401).json({
         status: false,
         message: "User Not Found",
@@ -226,7 +226,7 @@ app.put("/todos/:id", async (req: Request, res: Response) => {
     } else {
       res.status(200).json({
         status: true,
-        message: "Todo fetched Successfully",
+        message: "Todo Updated Successfully",
         data: result.rows[0],
       });
     }
@@ -238,6 +238,31 @@ app.put("/todos/:id", async (req: Request, res: Response) => {
   }
 });
 
+// Todo Delete
+app.delete("/todos/:id", async (req: Request, res: Response) => {
+  try {
+    const result = await pool.query(`DELETE FROM todos WHERE id=$1`, [
+      req.params.id,
+    ]);
+    if (result.rowCount === 0) {
+      res.status(404).json({
+        status: false,
+        message: "Todo is not found",
+      });
+    } else {
+      res.status(200).json({
+        status: true,
+        message: "Todo Deleted Successfully",
+        data: result.rows[0],
+      });
+    }
+  } catch (err: any) {
+    res.status(500).json({
+      status: false,
+      message: err.message,
+    });
+  }
+});
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
