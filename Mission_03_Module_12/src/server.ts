@@ -69,8 +69,8 @@ app.post("/users", async (req: Request, res: Response) => {
 });
 //All users
 app.get("/users", async (req: Request, res: Response) => {
-  const result = await pool.query(`SELECT * FROM users`);
   try {
+    const result = await pool.query(`SELECT * FROM users`);
     res.status(200).json({
       success: true,
       message: "Data Fetched Successfully",
@@ -84,7 +84,32 @@ app.get("/users", async (req: Request, res: Response) => {
   }
 });
 //Single User
-app.get("/users/:id", async (req: Request, res: Response) => {});
+app.get("/users/:id", async (req: Request, res: Response) => {
+  //console.log(req.params.id);
+  try {
+    const result = await pool.query(`SELECT * FROM users WHERE id = $1`, [
+      req.params.id,
+    ]);
+    // console.log(result.rows);
+    if (result.rows.length === 0) {
+      res.status(404).json({
+        status: false,
+        message: "User is not found",
+      });
+    } else {
+      res.status(200).json({
+        status: true,
+        message: "User fetched Successfully",
+        data: result.rows[0],
+      });
+    }
+  } catch (err: any) {
+    res.status(500).json({
+      status: false,
+      message: err.message,
+    });
+  }
+});
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
