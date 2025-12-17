@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { Pool } from "pg";
+import { Pool, Result } from "pg";
 import dotenv from "dotenv";
 import path from "path";
 dotenv.config({ path: path.join(process.cwd(), ".env") });
@@ -67,6 +67,7 @@ app.post("/users", async (req: Request, res: Response) => {
     });
   }
 });
+
 //All users
 app.get("/users", async (req: Request, res: Response) => {
   try {
@@ -83,6 +84,7 @@ app.get("/users", async (req: Request, res: Response) => {
     });
   }
 });
+
 //Single User
 app.get("/users/:id", async (req: Request, res: Response) => {
   //console.log(req.params.id);
@@ -110,6 +112,35 @@ app.get("/users/:id", async (req: Request, res: Response) => {
     });
   }
 });
+
+//Update User
+app.put("/users/:id", async (req: Request, res: Response) => {
+  const { name, email } = req.body;
+  try {
+    const result = await pool.query(
+      `UPDATE users SET name=$1 , email=$2 WHERE id=$3 RETURNING *`,
+      [name, email, req.params.id]
+    );
+    if (result.rows.length === 0) {
+      res.status(404).json({
+        status: false,
+        message: "User Not Found",
+      });
+    } else {
+      res.status(201).json({
+        status: true,
+        message: "User Update Successfully",
+        data: result.rows[0],
+      });
+    }
+  } catch (err: any) {
+    res.status(500).json({
+      status: false,
+      message: err.message,
+    });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
