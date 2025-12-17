@@ -16,28 +16,30 @@ const pool = new Pool({
 });
 const initDB = async () => {
   await pool.query(`
-    CREATE TABLE IF NOT EXISTS users(
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    age INT,
-    phone VARCHAR(15),
-    address TEXT,
-    created_at TIMESTAMP DEFAULT NOW(),
-    updated_at TIMESTAMP DEFAULT NOW()
-    )`);
-  await pool.query(`
-        CREATE TABLE IF NOT EXISTS todos(
+        CREATE TABLE IF NOT EXISTS users(
         id SERIAL PRIMARY KEY,
-        user_id INT REFERENCES users(id) ON DELETE CASCADE,
-        title VARCHAR(200) NOT NULL,
-        description TEXT,
-        completed BOOLEAN DEFAULT false,
-        due_date DATE,
+        name VARCHAR(100) NOT NULL,
+        email VARCHAR(150) UNIQUE NOT NULL,
+        age INT,
+        phone VARCHAR(15),
+        address TEXT,
         created_at TIMESTAMP DEFAULT NOW(),
         updated_at TIMESTAMP DEFAULT NOW()
         )
         `);
+
+  await pool.query(`
+            CREATE TABLE IF NOT EXISTS todos(
+            id SERIAL PRIMARY KEY,
+            user_id INT REFERENCES users(id) ON DELETE CASCADE,
+            title VARCHAR(200) NOT NULL,
+            description TEXT,
+            completed BOOLEAN DEFAULT false,
+            due_date DATE,
+            created_at TIMESTAMP DEFAULT NOW(),
+            updated_at TIMESTAMP DEFAULT NOW()
+            )
+            `);
 };
 initDB();
 app.get("/", (req: Request, res: Response) => {
@@ -56,7 +58,7 @@ app.post("/users", async (req: Request, res: Response) => {
     );
     //console.log(result.rows[0]);
     res.status(201).json({
-      status: false,
+      status: true,
       message: "Data Inserted Successfully",
       data: result.rows[0],
     });
@@ -159,6 +161,45 @@ app.delete("/users/:id", async (req: Request, res: Response) => {
         data: result.rows,
       });
     }
+  } catch (err: any) {
+    res.status(500).json({
+      status: false,
+      message: err.message,
+    });
+  }
+});
+
+// todos crud
+
+// Todo Create
+app.post("/todos", async (req: Request, res: Response) => {
+  const { user_id, title } = req.body;
+  try {
+    const result = await pool.query(
+      `INSERT INTO todos(user_id,title) VALUES($1,$2) RETURNING * `,
+      [user_id, title]
+    );
+    res.status(201).json({
+      status: true,
+      message: "Data Inserted Successfully",
+      data: result.rows[0],
+    });
+  } catch (err: any) {
+    res.status(500).json({
+      status: false,
+      message: err.message,
+    });
+  }
+});
+// todo get
+app.get("/todos", async (req: Request, res: Response) => {
+  try {
+    const result = await pool.query(`SELECT * FROM todos`);
+    res.status(201).json({
+      status: true,
+      message: "Data Fetched Successfully",
+      data: result.rows,
+    });
   } catch (err: any) {
     res.status(500).json({
       status: false,
