@@ -99,9 +99,7 @@ const updateUser = async (req: Request, res: Response) => {
 
 const deleteUser = async (req: Request, res: Response) => {
   try {
-    const result = await pool.query(`DELETE FROM users WHERE id=$1`, [
-      req.params.id,
-    ]);
+    const result = 
     if (result.rowCount === 0) {
       res.status(401).json({
         status: false,
