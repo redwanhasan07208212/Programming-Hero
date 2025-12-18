@@ -1,5 +1,9 @@
 import { Request, Response } from "express";
 import { userService } from "./user.service";
+import { pool } from "../../config/db";
+
+// * Create User Done
+
 const createUser = async (req: Request, res: Response) => {
   const { name, email } = req.body;
 
@@ -19,6 +23,8 @@ const createUser = async (req: Request, res: Response) => {
   }
 };
 
+// * Get User Done
+
 const getUser = async (req: Request, res: Response) => {
   try {
     const result = await userService.getUser();
@@ -35,7 +41,35 @@ const getUser = async (req: Request, res: Response) => {
   }
 };
 
+// * Single User Done
+
+const singleUser = async (req: Request, res: Response) => {
+  //console.log(req.params.id);
+  try {
+    const result = await userService.singleUser(req.params.id as string);
+    // console.log(result.rows);
+    if (result.rows.length === 0) {
+      res.status(404).json({
+        status: false,
+        message: "User is not found",
+      });
+    } else {
+      res.status(200).json({
+        status: true,
+        message: "User fetched Successfully",
+        data: result.rows[0],
+      });
+    }
+  } catch (err: any) {
+    res.status(500).json({
+      status: false,
+      message: err.message,
+    });
+  }
+};
+
 export const userController = {
   createUser,
   getUser,
+  singleUser,
 };
