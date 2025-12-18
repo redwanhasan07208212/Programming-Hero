@@ -99,7 +99,7 @@ const updateUser = async (req: Request, res: Response) => {
 
 const deleteUser = async (req: Request, res: Response) => {
   try {
-    const result = 
+    const result = await userService.deleteUser(req.params.id as string);
     if (result.rowCount === 0) {
       res.status(401).json({
         status: false,
