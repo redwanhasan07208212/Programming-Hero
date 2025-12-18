@@ -96,9 +96,35 @@ const updateUser = async (req: Request, res: Response) => {
     });
   }
 };
+
+const deleteUser = async (req: Request, res: Response) => {
+  try {
+    const result = await pool.query(`DELETE FROM users WHERE id=$1`, [
+      req.params.id,
+    ]);
+    if (result.rowCount === 0) {
+      res.status(401).json({
+        status: false,
+        message: "User Not Found",
+      });
+    } else {
+      res.status(200).json({
+        success: true,
+        message: "User deleted successfully",
+        data: result.rows,
+      });
+    }
+  } catch (err: any) {
+    res.status(500).json({
+      status: false,
+      message: err.message,
+    });
+  }
+};
 export const userController = {
   createUser,
   getUser,
   singleUser,
   updateUser,
+  deleteUser,
 };
