@@ -20,8 +20,6 @@ app.get("/", logger, (req: Request, res: Response) => {
 
 app.use("/users", userRoutes);
 
-//All users
-
 //Single User
 app.get("/users/:id", async (req: Request, res: Response) => {
   //console.log(req.params.id);
