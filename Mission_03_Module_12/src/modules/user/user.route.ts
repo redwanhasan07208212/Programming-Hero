@@ -10,4 +10,6 @@ router.get("/", userController.getUser);
 
 router.get("/:id", userController.singleUser);
 
+router.put("/:id", userController.updateUser);
+
 export const userRoutes = router;
