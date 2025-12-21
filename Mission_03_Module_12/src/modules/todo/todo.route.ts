@@ -7,5 +7,6 @@ const router = Router();
 router.post("/", todosController.createTodos);
 router.get("/", todosController.getAllTodos);
 router.get("/:id", todosController.getSingleTodos);
+router.put("/:id", todosController.updateTodos);
 
 export const todosRoutes = router;
