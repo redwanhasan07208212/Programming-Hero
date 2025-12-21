@@ -22,8 +22,6 @@ app.get("/", logger, (req: Request, res: Response) => {
 app.use("/users", userRoutes);
 app.use("/todos", todosRoutes);
 
-// Todo Delete
-
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
