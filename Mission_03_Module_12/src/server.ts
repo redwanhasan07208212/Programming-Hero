@@ -25,7 +25,6 @@ app.use("/todos", todosRoutes);
 // todos crud
 
 // Todo Create
-app.post("/todos");
 
 // todo get
 app.get("/todos", async (req: Request, res: Response) => {
