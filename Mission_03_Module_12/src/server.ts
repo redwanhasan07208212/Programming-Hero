@@ -22,27 +22,6 @@ app.get("/", logger, (req: Request, res: Response) => {
 app.use("/users", userRoutes);
 app.use("/todos", todosRoutes);
 
-// todos crud
-
-// Todo Create
-
-// todo get
-app.get("/todos", async (req: Request, res: Response) => {
-  try {
-    const result = await pool.query(`SELECT * FROM todos`);
-    res.status(201).json({
-      status: true,
-      message: "Data Fetched Successfully",
-      data: result.rows,
-    });
-  } catch (err: any) {
-    res.status(500).json({
-      status: false,
-      message: err.message,
-    });
-  }
-});
-
 // Todo Single
 app.get("/todos/:id", async (req: Request, res: Response) => {
   try {

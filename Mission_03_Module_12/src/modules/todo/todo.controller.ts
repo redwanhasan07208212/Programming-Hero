@@ -19,6 +19,23 @@ const createTodos = async (req: Request, res: Response) => {
   }
 };
 
+const getAllTodos = async (req: Request, res: Response) => {
+  try {
+    const result = await todoService.getAllTodos();
+    res.status(201).json({
+      status: true,
+      message: "Data Fetched Successfully",
+      data: result.rows,
+    });
+  } catch (err: any) {
+    res.status(500).json({
+      status: false,
+      message: err.message,
+    });
+  }
+};
+
 export const todosController = {
   createTodos,
+  getAllTodos,
 };
