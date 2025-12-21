@@ -12,7 +12,14 @@ const getAllTodos = async () => {
   const result = await pool.query(`SELECT * FROM todos`);
   return result;
 };
+
+const getSingleTodos = async (id: string) => {
+  const result = await pool.query(`SELECT * FROM todos WHERE id=$1`, [id]);
+
+  return result;
+};
 export const todoService = {
   createTodo,
   getAllTodos,
+  getSingleTodos,
 };

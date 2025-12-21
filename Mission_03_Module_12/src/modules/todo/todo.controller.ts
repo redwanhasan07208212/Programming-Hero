@@ -35,7 +35,31 @@ const getAllTodos = async (req: Request, res: Response) => {
   }
 };
 
+const getSingleTodos = async (req: Request, res: Response) => {
+  try {
+    const result = await todoService.getSingleTodos(req.params.id as string);
+    if (result.rows.length === 0) {
+      res.status(404).json({
+        status: false,
+        message: "Todo is not found",
+      });
+    } else {
+      res.status(200).json({
+        status: true,
+        message: "Todo fetched Successfully",
+        data: result.rows[0],
+      });
+    }
+  } catch (err: any) {
+    res.status(500).json({
+      status: false,
+      message: err.message,
+    });
+  }
+};
+
 export const todosController = {
   createTodos,
   getAllTodos,
+  getSingleTodos,
 };

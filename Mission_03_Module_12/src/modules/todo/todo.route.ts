@@ -6,5 +6,6 @@ const router = Router();
 
 router.post("/", todosController.createTodos);
 router.get("/", todosController.getAllTodos);
+router.get("/:id", todosController.getSingleTodos);
 
 export const todosRoutes = router;
