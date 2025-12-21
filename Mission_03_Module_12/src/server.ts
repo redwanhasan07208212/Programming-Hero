@@ -22,9 +22,6 @@ app.get("/", logger, (req: Request, res: Response) => {
 app.use("/users", userRoutes);
 app.use("/todos", todosRoutes);
 
-// Todo Single
-app.get("/todos/:id");
-
 // Todo update
 app.put("/todos/:id", async (req: Request, res: Response) => {
   const { title } = req.body;
