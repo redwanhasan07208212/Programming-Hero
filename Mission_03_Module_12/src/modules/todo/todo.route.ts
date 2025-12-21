@@ -8,5 +8,6 @@ router.post("/", todosController.createTodos);
 router.get("/", todosController.getAllTodos);
 router.get("/:id", todosController.getSingleTodos);
 router.put("/:id", todosController.updateTodos);
+router.delete("/:id", todosController.deleteTodos);
 
 export const todosRoutes = router;
