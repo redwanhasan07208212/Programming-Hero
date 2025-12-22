@@ -4,6 +4,7 @@ import config from "./config";
 import logger from "./middleware/logger";
 import { userRoutes } from "./modules/user/user.route";
 import { todosRoutes } from "./modules/todo/todo.route";
+import { authRouter } from "./modules/auth/auth.route";
 
 const app = express();
 const port = config.port;
@@ -21,6 +22,7 @@ app.get("/", logger, (req: Request, res: Response) => {
 
 app.use("/users", userRoutes);
 app.use("/todos", todosRoutes);
+app.use("/auth", authRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
