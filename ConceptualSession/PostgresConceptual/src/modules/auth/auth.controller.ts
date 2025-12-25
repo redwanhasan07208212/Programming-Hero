@@ -7,7 +7,7 @@ const login = async (req: Request, res: Response) => {
     const result = await authService.loginUserIntoDb(email, password);
     res.status(201).json({
       success: true,
-      message: "User created Successfully",
+      message: "User Login Successfully",
       data: result,
     });
   } catch (err: any) {
