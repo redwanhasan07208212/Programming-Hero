@@ -55,7 +55,13 @@ const loginUserIntoDb = async (email: string, password: string) => {
   return { token, user };
 };
 
+const getAllUserIntoDb = async () => {
+  const result = await pool.query(`SELECT * FROM users`);
+  return result;
+};
+
 export const authService = {
   loginUserIntoDb,
   registerUserIntoDb,
+  getAllUserIntoDb,
 };

@@ -34,7 +34,23 @@ const login = async (req: Request, res: Response) => {
   }
 };
 
+const getAllUser = async (req: Request, res: Response) => {
+  try {
+    const result = await authService.getAllUserIntoDb();
+    res.status(201).json({
+      success: true,
+      message: "Users Fetch Successfully",
+      data: result.rows,
+    });
+  } catch (err: any) {
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+};
 export const authController = {
   login,
   register,
+  getAllUser,
 };
