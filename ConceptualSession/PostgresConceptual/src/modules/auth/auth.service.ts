@@ -9,7 +9,7 @@ const loginUserIntoDb = async (email: string, password: string) => {
   if (!matchPassword) {
     throw new Error("Invalid Credentials");
   }
-
+  delete user.rows[0].password;
   return user;
 };
 
