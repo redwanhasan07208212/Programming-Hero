@@ -15,7 +15,7 @@ const auth = () => {
     const user = await pool.query(`SELECT * FROM users WHERE email=$1`, [
       decoded.email,
     ]);
-    if ((user.rows, length === 0)) {
+    if (user.rows.length === 0) {
       throw new Error("User not Found");
     }
     next();
