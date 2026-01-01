@@ -47,7 +47,9 @@ const loginUserIntoDb = async (email: string, password: string) => {
     id: user.id,
     name: user.name,
     email: user.email,
+    role: user.role,
   };
+  // console.log(user.roles);
   const token = jwt.sign(jwtPayload, config.secret_key as string, {
     expiresIn: "7d",
   });

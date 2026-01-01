@@ -11,6 +11,7 @@ const initDB = async () => {
     id SERIAL PRIMARY KEY,
     name VARCHAR(250) NOT NULL,
     email VARCHAR(150) UNIQUE NOT NULL,
+    role VARCHAR(50) DEFAULT 'user',
     password TEXT NOT NULL,
     age INT,
     created_at TIMESTAMP DEFAULT NOW(),
