@@ -14,7 +14,6 @@ import config from "../../config";
 export const signup = async (userData: UserSignup): Promise<User> => {
   const { name, email, password, phone, role = "customer" } = userData;
 
-  // Validate input
   if (!name || !email || !password || !phone) {
     throw new AppError(400, "All fields are required");
   }
@@ -23,12 +22,10 @@ export const signup = async (userData: UserSignup): Promise<User> => {
     throw new AppError(400, "Password must be at least 6 characters long");
   }
 
-  // Validate role
   if (role && !["admin", "customer"].includes(role)) {
     throw new AppError(400, "Role must be 'admin' or 'customer'");
   }
 
-  // Check if user already exists
   const existingUser = await pool.query(
     "SELECT * FROM users WHERE email = $1",
     [email.toLowerCase()]
